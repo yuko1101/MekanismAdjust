@@ -3,6 +3,7 @@ package io.github.yuko1101.digitalmineradjust.mixin;
 import io.github.yuko1101.digitalmineradjust.DigitalMinerAdjust;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import mekanism.common.tile.machine.TileEntityDigitalMiner;
+import mekanism.common.util.MekanismUtils;
 import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,16 +24,17 @@ public abstract class MixinTileEntityDigitalMiner {
 
     @Shadow public abstract int getRadius();
 
-    @Shadow private int cachedToMine;
     @Unique
     private int digitalMinerAdjust$initialExpectedMineCount = 0;
 
     @Inject(method = "getDelay", at = @At("HEAD"), cancellable = true)
     private void getDelay(CallbackInfoReturnable<Integer> cir) {
         if (digitalMinerAdjust$initialExpectedMineCount == 0) {
-            throw new IllegalStateException("");
+            throw new IllegalStateException("You can't call this method with initialExpectedMineCount 0.");
         }
-        cir.setReturnValue(DigitalMinerAdjust.BASE_TICKS_PER_MINE * digitalMinerAdjust$rangeBlockCount() / digitalMinerAdjust$initialExpectedMineCount);
+        final TileEntityDigitalMiner digitalMiner = ((TileEntityDigitalMiner)(Object) this);
+        final int delay = MekanismUtils.getTicks(digitalMiner, DigitalMinerAdjust.BASE_TICKS_PER_MINE * digitalMinerAdjust$rangeBlockCount() / digitalMinerAdjust$initialExpectedMineCount);
+        cir.setReturnValue(delay);
     }
 
     @Inject(method = "updateFromSearch", at = @At("HEAD"))
