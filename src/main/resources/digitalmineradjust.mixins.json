@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "io.github.yuko1101.digitalmineradjust.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "DigitalMinerAdjust.refmap.json",
+  "refmap": "digitalmineradjust.refmap.json",
   "mixins": [
     "MixinTileEntityDigitalMiner"
   ],
