@@ -3,6 +3,7 @@ package io.github.yuko1101.digitalmineradjust.mixin;
 import io.github.yuko1101.digitalmineradjust.DigitalMinerAdjust;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import mekanism.common.tile.machine.TileEntityDigitalMiner;
+import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -22,6 +23,7 @@ public abstract class MixinTileEntityDigitalMiner {
 
     @Shadow public abstract int getRadius();
 
+    @Shadow private int cachedToMine;
     @Unique
     private int digitalMinerAdjust$initialExpectedMineCount = 0;
 
@@ -46,5 +48,18 @@ public abstract class MixinTileEntityDigitalMiner {
     @Unique
     private int digitalMinerAdjust$rangeBlockCount() {
         return (int) ((getMaxY() - getMinY() + 1) * Math.pow(getRadius() * 2.0 + 1, 2.0));
+    }
+
+
+    @Inject(method = "onBoundingBlockPowerChange", at = @At("HEAD"))
+    private void onBoundingBlockPowerChange(BlockPos boundingPos, int oldLevel, int newLevel, CallbackInfo ci) {
+        final TileEntityDigitalMiner digitalMiner = ((TileEntityDigitalMiner)(Object) this);
+        if (oldLevel > 0 && newLevel == 0) {
+            digitalMiner.reset();
+        } else if (newLevel > oldLevel) {
+            if (!digitalMiner.isRunning()) digitalMiner.start();
+        } else if (newLevel < oldLevel) {
+            if (digitalMiner.isRunning()) digitalMiner.stop();
+        }
     }
 }
