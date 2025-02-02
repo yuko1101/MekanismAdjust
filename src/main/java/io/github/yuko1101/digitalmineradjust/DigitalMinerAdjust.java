@@ -1,6 +1,6 @@
 package io.github.yuko1101.digitalmineradjust;
 
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.Mod;
 
 @Mod(DigitalMinerAdjust.MOD_ID)
 public class DigitalMinerAdjust {
