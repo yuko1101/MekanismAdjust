@@ -24,6 +24,10 @@ public abstract class MixinTileEntityDigitalMiner {
 
     @Shadow public abstract int getRadius();
 
+    @Shadow private int delay;
+
+    @Shadow public abstract int getDelay();
+
     @Unique
     private int digitalMinerAdjust$initialExpectedMineCount = 0;
 
@@ -40,6 +44,7 @@ public abstract class MixinTileEntityDigitalMiner {
     @Inject(method = "updateFromSearch", at = @At("HEAD"))
     private void updateFromSearch(Long2ObjectMap<BitSet> oresToMine, int found, CallbackInfo ci) {
         digitalMinerAdjust$initialExpectedMineCount = found;
+        delay = getDelay();
     }
 
     @Inject(method = "reset", at = @At("HEAD"))
