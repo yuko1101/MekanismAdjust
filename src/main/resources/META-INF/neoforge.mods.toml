@@ -75,7 +75,7 @@ side = "BOTH"
 [[dependencies."${mod_id}"]]
 modId = "mekanism"
 type = "required"
-versionRange = "[${mekanism_version_range},)"
+versionRange = "${mekanism_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
