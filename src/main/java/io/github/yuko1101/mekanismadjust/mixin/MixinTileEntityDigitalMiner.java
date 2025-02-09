@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.BitSet;
 
-@Mixin(value = TileEntityDigitalMiner.class, remap = false)
+@Mixin(value = TileEntityDigitalMiner.class)
 public abstract class MixinTileEntityDigitalMiner {
 
     @Shadow public abstract int getMaxY();
