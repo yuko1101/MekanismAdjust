@@ -1,6 +1,6 @@
-package io.github.yuko1101.digitalmineradjust.mixin;
+package io.github.yuko1101.mekanismadjust.mixin;
 
-import io.github.yuko1101.digitalmineradjust.DigitalMinerAdjust;
+import io.github.yuko1101.mekanismadjust.MekanismAdjust;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import mekanism.common.tile.machine.TileEntityDigitalMiner;
 import mekanism.common.util.MekanismUtils;
@@ -37,7 +37,7 @@ public abstract class MixinTileEntityDigitalMiner {
             throw new IllegalStateException("You can't call this method with initialExpectedMineCount 0.");
         }
         final TileEntityDigitalMiner digitalMiner = ((TileEntityDigitalMiner)(Object) this);
-        final int delay = MekanismUtils.getTicks(digitalMiner, DigitalMinerAdjust.BASE_TICKS_PER_MINE * digitalMinerAdjust$rangeBlockCount() / digitalMinerAdjust$initialExpectedMineCount);
+        final int delay = MekanismUtils.getTicks(digitalMiner, MekanismAdjust.BASE_TICKS_PER_MINE * digitalMinerAdjust$rangeBlockCount() / digitalMinerAdjust$initialExpectedMineCount);
         cir.setReturnValue(delay);
     }
 

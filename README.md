@@ -1,2 +1,2 @@
-# DigitalMinerAdjust
-Rebalances Mekanism's over powered Digital Miner.
+# MekanismAdjust
+Rebalances Mekanism mod.

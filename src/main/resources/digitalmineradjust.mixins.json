@@ -1,9 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "io.github.yuko1101.digitalmineradjust.mixin",
+  "package": "io.github.yuko1101.mekanismadjust.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "digitalmineradjust.refmap.json",
+  "refmap": "mekanismadjust.refmap.json",
   "mixins": [
     "MixinTileEntityDigitalMiner"
   ],
