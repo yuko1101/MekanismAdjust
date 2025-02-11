@@ -19,13 +19,8 @@ public class MekanismAdjust {
             if (path.toString().replaceFirst("^/", "").equals("data/mekanism/recipe/processing/netherite/ancient_debris_to_dirty_scrap.json")) {
                 var jsonObject = json.getAsJsonObject();
 
-                var newInput = jsonObject.get("input").getAsJsonObject();
-                newInput.addProperty("count", 3);
-                jsonObject.add("input", newInput);
-
-                var output = jsonObject.get("output").getAsJsonObject();
-                output.addProperty("count", 4);
-                jsonObject.add("output", output);
+                jsonObject.get("input").getAsJsonObject().addProperty("count", 3);
+                jsonObject.get("output").getAsJsonObject().addProperty("count", 4);
 
                 return jsonObject;
             }
