@@ -1,10 +1,10 @@
-package io.github.yuko1101.mekanismadjust.mixin;
+package io.github.yuko1101.mekanismadjust.neoforge.mixin;
 
 import io.github.yuko1101.mekanismadjust.MekanismAdjust;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import mekanism.common.tile.machine.TileEntityDigitalMiner;
 import mekanism.common.util.MekanismUtils;
-import net.minecraft.core.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;

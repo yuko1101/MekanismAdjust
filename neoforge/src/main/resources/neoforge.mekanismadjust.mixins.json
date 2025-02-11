@@ -1,14 +1,13 @@
 {
   "required": true,
+  "package": "io.github.yuko1101.mekanismadjust.neoforge.mixin",
+  "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
-  "package": "io.github.yuko1101.mekanismadjust.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "refmap": "mekanismadjust.refmap.json",
+  "client": [
+  ],
   "mixins": [
     "MixinItemBlockCardboardBox",
     "MixinTileEntityDigitalMiner"
-  ],
-  "client": [
   ],
   "injectors": {
     "defaultRequire": 1

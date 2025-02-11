@@ -1,0 +1,41 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+#issueTrackerURL = ""
+license = "MIT"
+
+[[mods]]
+modId = "mekanismadjust"
+version = "${version}"
+displayName = "MekanismAdjust"
+authors = "yuko1101"
+description = '''
+Rebalances Mekanism mod.
+'''
+#logoFile = ""
+
+[[dependencies.mekanismadjust]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.mekanismadjust]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.mekanismadjust]]
+modId = "mekanism"
+type = "required"
+versionRange = "[${mekanism_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config = "mekanismadjust.mixins.json"
+
+[[mixins]]
+config = "neoforge.mekanismadjust.mixins.json"

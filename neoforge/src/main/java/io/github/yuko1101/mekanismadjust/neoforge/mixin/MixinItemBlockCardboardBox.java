@@ -1,4 +1,4 @@
-package io.github.yuko1101.mekanismadjust.mixin;
+package io.github.yuko1101.mekanismadjust.neoforge.mixin;
 
 import mekanism.common.item.block.ItemBlockCardboardBox;
 import org.spongepowered.asm.mixin.Mixin;

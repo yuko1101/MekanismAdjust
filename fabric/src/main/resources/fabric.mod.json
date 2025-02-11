@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "mekanismadjust",
+  "version": "${version}",
+  "name": "MekanismAdjust",
+  "description": "Rebalances Mekanism mod.",
+  "authors": [
+    "yuko1101"
+  ],
+  "contact": {
+    "homepage": "https://github.com/yuko1101/MekanismAdjust"
+  },
+  "license": "MIT",
+  "icon": "assets/mekanismadjust/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.yuko1101.mekanismadjust.fabric.MekanismAdjustFabric"
+    ]
+  },
+  "mixins": [
+    "mekanismadjust.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "mekanism": ">=${mekanism_version}"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
