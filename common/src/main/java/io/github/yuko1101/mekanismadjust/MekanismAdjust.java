@@ -22,5 +22,13 @@ public class MekanismAdjust {
 
             return json.toString().getBytes();
         });
+        ResourceModifier.registerQuickModifier("data/mekanism/recipe/processing/netherite/ancient_debris_to_scrap.json", data -> {
+            var json = JsonParser.parseString(new String(data)).getAsJsonObject();
+
+            json.get("input").getAsJsonObject().addProperty("count", 3);
+            json.get("output").getAsJsonObject().addProperty("count", 4);
+
+            return json.toString().getBytes();
+        });
     }
 }
