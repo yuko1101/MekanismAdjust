@@ -17,15 +17,10 @@ public interface InputSupplierMixin {
     @Inject(method = "create(Ljava/nio/file/Path;)Lnet/minecraft/resource/InputSupplier;", at = @At("HEAD"), cancellable = true)
     private static void create(Path path, CallbackInfoReturnable<InputSupplier<InputStream>> cir) throws IOException {
         ResourceModifier.init();
-        var inputStream = ResourceModifier.replaceWithFile(path);
-        if (inputStream != null) {
-            cir.setReturnValue(() -> inputStream);
-        }
-        if (path.toString().endsWith(".json")) {
-            var modifiedJson = ResourceModifier.modifyJson(path);
-            if (modifiedJson != null) {
-                cir.setReturnValue(() -> new ByteArrayInputStream(modifiedJson.toString().getBytes()));
-            }
+
+        var modifiedData = ResourceModifier.modifyResource(path);
+        if (modifiedData != null) {
+            cir.setReturnValue(() -> new ByteArrayInputStream(modifiedData));
         }
     }
 }

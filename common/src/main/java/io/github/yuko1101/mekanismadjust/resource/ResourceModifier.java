@@ -1,50 +1,37 @@
 package io.github.yuko1101.mekanismadjust.resource;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonParser;
 import io.github.yuko1101.mekanismadjust.MekanismAdjust;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ResourceModifier {
     private static boolean initialized = false;
-    private static final ArrayList<JsonModifier> jsonModifiers = new ArrayList<>();
+    private static final HashMap<String, QuickResourceModifier> quickResourceModifiers = new HashMap<>();
 
     public static void init() {
         if (initialized) return;
         initialized = true;
-        MekanismAdjust.registerJsonModifiers(jsonModifiers);
+        MekanismAdjust.registerModifiers();
     }
 
-    @Nullable
-    public static InputStream replaceWithFile(Path path) {
-        return ResourceModifier.class.getClassLoader().getResourceAsStream("modified/" + path.toString().replaceFirst("^/", ""));
-    }
+    public static byte @Nullable [] modifyResource(Path path) throws IOException {
+        String pathString = path.toString().replaceFirst("^/", "");
+        var modifier = quickResourceModifiers.get(pathString);
+        if (modifier == null) return null;
 
-    @Nullable
-    public static JsonElement modifyJson(Path path) throws IOException {
-        boolean isModified = false;
-        JsonElement jsonElement;
+        byte[] data;
         try (var inputStream = Files.newInputStream(path)) {
-            jsonElement = JsonParser.parseReader(new InputStreamReader(inputStream));
-        } catch (JsonParseException ignored) {
-            return null;
-        }
-        for (var modifier : jsonModifiers) {
-            var modifiedJson = modifier.modify(path, jsonElement);
-            if (modifiedJson != null) {
-                isModified = true;
-                jsonElement = modifiedJson;
-            }
+            data = inputStream.readAllBytes();
         }
 
-        return isModified ? jsonElement : null;
+        return modifier.modify(data);
+    }
+
+    public static void registerQuickModifier(String path, QuickResourceModifier modifier) {
+        quickResourceModifiers.put(path, modifier);
     }
 }
