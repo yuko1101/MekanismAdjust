@@ -1,6 +1,8 @@
 package io.github.yuko1101.mekanismadjust;
 
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import io.github.yuko1101.mekanismadjust.resource.ResourceModifier;
 
 public class MekanismAdjust {
@@ -17,16 +19,29 @@ public class MekanismAdjust {
         ResourceModifier.registerQuickModifier("data/mekanism/recipe/processing/netherite/ancient_debris_to_dirty_scrap.json", data -> {
             var json = JsonParser.parseString(new String(data)).getAsJsonObject();
 
-            json.get("input").getAsJsonObject().addProperty("count", 3);
-            json.get("output").getAsJsonObject().addProperty("count", 4);
+            json.getAsJsonObject("input").addProperty("count", 3);
+            json.getAsJsonObject("output").addProperty("count", 4);
 
             return json.toString().getBytes();
         });
         ResourceModifier.registerQuickModifier("data/mekanism/recipe/processing/netherite/ancient_debris_to_scrap.json", data -> {
             var json = JsonParser.parseString(new String(data)).getAsJsonObject();
 
-            json.get("input").getAsJsonObject().addProperty("count", 3);
-            json.get("output").getAsJsonObject().addProperty("count", 4);
+            json.getAsJsonObject("input").addProperty("count", 3);
+            json.getAsJsonObject("output").addProperty("count", 4);
+
+            return json.toString().getBytes();
+        });
+
+        ResourceModifier.registerStartsWithModifier("data/mekanism/recipe/mekasuit_", (path, data) -> {
+            var json = JsonParser.parseString(new String(data)).getAsJsonObject();
+
+            var pattern = json.getAsJsonArray("pattern");
+            pattern.set(1, new JsonPrimitive(pattern.get(1).getAsString().replace("P", "N")));
+
+            var netheriteBlock = new JsonObject();
+            netheriteBlock.addProperty("item", "minecraft:netherite_block");
+            json.getAsJsonObject("key").add("N", netheriteBlock);
 
             return json.toString().getBytes();
         });
