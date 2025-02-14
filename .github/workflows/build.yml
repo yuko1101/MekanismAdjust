@@ -43,4 +43,4 @@ jobs:
         run: |
           gh release create ${{github.ref_name}} --generate-notes fabric/build/libs/*.jar neoforge/build/libs/*.jar
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }} # secrets.GITHUB_TOKEN won't trigger the release event
