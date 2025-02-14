@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        loader: [fabric, neoforge]
+        loader: [neoforge]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
