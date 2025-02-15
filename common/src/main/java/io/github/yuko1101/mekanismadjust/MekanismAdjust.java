@@ -33,6 +33,14 @@ public class MekanismAdjust {
             return json.toString().getBytes();
         });
 
+        ResourceModifier.registerQuickModifier("data/mekanism/recipe/nucleosynthesizing/enchanted_golden_apple.json", data -> {
+            var json = JsonParser.parseString(new String(data)).getAsJsonObject();
+
+            json.getAsJsonObject("chemical_input").addProperty("amount", 15);
+
+            return json.toString().getBytes();
+        });
+
         ResourceModifier.registerStartsWithModifier("data/mekanism/recipe/mekasuit_", (path, data) -> {
             var json = JsonParser.parseString(new String(data)).getAsJsonObject();
 
