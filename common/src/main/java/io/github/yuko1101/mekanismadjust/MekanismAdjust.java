@@ -53,5 +53,24 @@ public class MekanismAdjust {
 
             return json.toString().getBytes();
         });
+
+        ResourceModifier.registerQuickModifier("data/mekanism/recipe/meka_tool.json", data -> {
+            var json = JsonParser.parseString(new String(data)).getAsJsonObject();
+
+            var pattern = json.getAsJsonArray("pattern");
+            pattern.set(0, new JsonPrimitive("PCP"));
+            pattern.set(1, new JsonPrimitive("N#N"));
+
+            var netheriteBlock = new JsonObject();
+            netheriteBlock.addProperty("item", "minecraft:netherite_block");
+
+            var key = json.getAsJsonObject("key");
+            key.add("N", netheriteBlock);
+            key.remove("o");
+
+            System.out.println(json);
+
+            return json.toString().getBytes();
+        });
     }
 }
