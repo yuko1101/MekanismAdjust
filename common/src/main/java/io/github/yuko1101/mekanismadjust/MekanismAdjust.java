@@ -68,8 +68,6 @@ public class MekanismAdjust {
             key.add("N", netheriteBlock);
             key.remove("o");
 
-            System.out.println(json);
-
             return json.toString().getBytes();
         });
     }
